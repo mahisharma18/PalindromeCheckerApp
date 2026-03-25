@@ -1,68 +1,49 @@
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * ============================================================
- * CLASS - RoomInventory
+ * MAIN CLASS - UseCase4RoomSearch
  * ============================================================
  *
- * Use Case 3: Centralized Room Inventory Management
+ * Use Case 4: Room Search Functionality
  *
  * Description:
- * This class acts as the single source of truth
- * for room availability in the hotel.
+ * This class allows users to search for room availability
+ * by room type using the centralized RoomInventory.
  *
- * Room pricing and characteristics are obtained
- * from Room objects, not duplicated here.
+ * No booking is performed here, only availability check.
  *
- * This avoids multiple sources of truth and
- * keeps responsibilities clearly separated.
- *
- * @version 3.1
+ * @version 4.0
  */
-public class RoomInventory {
+public class UseCase4RoomSearch {
 
     /**
-     * Stores available room count for each room type.
-     * Key   -> Room type name
-     * Value -> Available room count
+     * Application entry point.
+     * @param args Command-line arguments
      */
-    private Map<String, Integer> roomAvailability;
+    public static void main(String[] args) {
 
-    /**
-     * Constructor initializes the inventory
-     * with default availability values.
-     */
-    public RoomInventory() {
-        roomAvailability = new HashMap<>();
-        initializeInventory();
-    }
+        Scanner sc = new Scanner(System.in);
+        RoomInventory inventory = new RoomInventory();
 
-    /**
-     * Initializes room availability data.
-     * This method centralizes inventory setup
-     * instead of using scattered variables.
-     */
-    private void initializeInventory() {
-        roomAvailability.put("Single", 10);
-        roomAvailability.put("Double", 5);
-        roomAvailability.put("Suite", 2);
-    }
+        System.out.print("Enter room type to search (Single/Double/Suite): ");
+        String roomType = sc.nextLine();
 
-    /**
-     * Returns the current availability map.
-     * @return map of room type to available count
-     */
-    public Map<String, Integer> getRoomAvailability() {
-        return roomAvailability;
-    }
+        Map<String, Integer> availability = inventory.getRoomAvailability();
 
-    /**
-     * Updates availability for a specific room type.
-     * @param roomType the room type to update
-     * @param count new availability count
-     */
-    public void updateAvailability(String roomType, int count) {
-        roomAvailability.put(roomType, count);
+        if (availability.containsKey(roomType)) {
+            int count = availability.get(roomType);
+
+            if (count > 0) {
+                System.out.println(roomType + " rooms are available: " + count);
+            } else {
+                System.out.println(roomType + " rooms are currently not available.");
+            }
+        } else {
+            System.out.println("Invalid room type entered.");
+        }
+
+        sc.close();
     }
 }
