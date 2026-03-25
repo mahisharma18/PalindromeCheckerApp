@@ -1,30 +1,24 @@
 import java.util.Scanner;
+public class Room {
 
-public class UseCase1HotelBookingApp {
+    private int roomNumber;
+    private String roomType;
+    private double pricePerNight;
+    private boolean isAvailable;
 
-    public static void main(String[] args) {
+    // Constructor
+    public Room(int roomNumber, String roomType, double pricePerNight, boolean isAvailable) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.pricePerNight = pricePerNight;
+        this.isAvailable = isAvailable;
+    }
 
-        Scanner sc = new Scanner(System.in);
-
-        // Input
-        System.out.print("Enter customer name: ");
-        String name = sc.nextLine();
-
-        System.out.print("Enter number of nights: ");
-        int nights = sc.nextInt();
-
-        System.out.print("Enter cost per night: ");
-        double costPerNight = sc.nextDouble();
-
-        // Processing
-        double totalCost = nights * costPerNight;
-
-        // Output
-        System.out.println("Customer Name: " + name);
-        System.out.println("Number of Nights: " + nights);
-        System.out.println("Cost per Night: " + costPerNight);
-        System.out.println("Total Cost: " + totalCost);
-
-        sc.close();
+    // Method to display room details
+    public void displayRoomDetails() {
+        System.out.println("Room Number: " + roomNumber);
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Price per Night: " + pricePerNight);
+        System.out.println("Available: " + isAvailable);
     }
 }
