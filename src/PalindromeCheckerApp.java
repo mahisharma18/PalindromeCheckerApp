@@ -1,24 +1,68 @@
-import java.util.Scanner;
-public class Room {
+import java.util.HashMap;
+import java.util.Map;
 
-    private int roomNumber;
-    private String roomType;
-    private double pricePerNight;
-    private boolean isAvailable;
+/**
+ * ============================================================
+ * CLASS - RoomInventory
+ * ============================================================
+ *
+ * Use Case 3: Centralized Room Inventory Management
+ *
+ * Description:
+ * This class acts as the single source of truth
+ * for room availability in the hotel.
+ *
+ * Room pricing and characteristics are obtained
+ * from Room objects, not duplicated here.
+ *
+ * This avoids multiple sources of truth and
+ * keeps responsibilities clearly separated.
+ *
+ * @version 3.1
+ */
+public class RoomInventory {
 
-    // Constructor
-    public Room(int roomNumber, String roomType, double pricePerNight, boolean isAvailable) {
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.pricePerNight = pricePerNight;
-        this.isAvailable = isAvailable;
+    /**
+     * Stores available room count for each room type.
+     * Key   -> Room type name
+     * Value -> Available room count
+     */
+    private Map<String, Integer> roomAvailability;
+
+    /**
+     * Constructor initializes the inventory
+     * with default availability values.
+     */
+    public RoomInventory() {
+        roomAvailability = new HashMap<>();
+        initializeInventory();
     }
 
-    // Method to display room details
-    public void displayRoomDetails() {
-        System.out.println("Room Number: " + roomNumber);
-        System.out.println("Room Type: " + roomType);
-        System.out.println("Price per Night: " + pricePerNight);
-        System.out.println("Available: " + isAvailable);
+    /**
+     * Initializes room availability data.
+     * This method centralizes inventory setup
+     * instead of using scattered variables.
+     */
+    private void initializeInventory() {
+        roomAvailability.put("Single", 10);
+        roomAvailability.put("Double", 5);
+        roomAvailability.put("Suite", 2);
+    }
+
+    /**
+     * Returns the current availability map.
+     * @return map of room type to available count
+     */
+    public Map<String, Integer> getRoomAvailability() {
+        return roomAvailability;
+    }
+
+    /**
+     * Updates availability for a specific room type.
+     * @param roomType the room type to update
+     * @param count new availability count
+     */
+    public void updateAvailability(String roomType, int count) {
+        roomAvailability.put(roomType, count);
     }
 }
