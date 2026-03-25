@@ -1,26 +1,35 @@
 import java.util.Scanner;
 
-public class PalindromeCheck {
+public class UseCase10PalindromeCheckerApp {
+
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Input: ");
-        String str = sc.nextLine();
+        String input = sc.nextLine();
 
-        String reversed = "";
+        boolean result = check(input, 0, input.length() - 1);
 
-        // Reverse the string
-        for (int i = str.length() - 1; i >= 0; i--) {
-            reversed += str.charAt(i);
-        }
-
-        // Check palindrome
-        if (str.equalsIgnoreCase(reversed)) {
-            System.out.println("Is Palindrome?: true");
-        } else {
-            System.out.println("Is Palindrome?: false");
-        }
+        System.out.println("Is Palindrome?: " + result);
 
         sc.close();
+    }
+
+    private static boolean check(String s, int start, int end) {
+
+        // Base case: all characters matched
+        if (start >= end) {
+            return true;
+        }
+
+        // If mismatch found
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call
+        return check(s, start + 1, end - 1);
     }
 }
