@@ -1,39 +1,43 @@
-import java.util.LinkedList;
+import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+public class UseCase12PalindromeCheckerApp {
 
+    /**
+     * Application entry point
+     */
     public static void main(String[] args) {
 
-        // Define the input string
-        String input = "refer";
+        Scanner sc = new Scanner(System.in);
 
-        // Create a LinkedList to store characters
-        LinkedList<Character> list = new LinkedList<>();
+        System.out.print("Input: ");
+        String input = sc.nextLine();
 
-        // Add each character to the list
-        for (char c : input.toCharArray()) {
-            list.add(c);
+        // Optional: make it case-insensitive and ignore spaces
+        input = input.replaceAll("\\s+", "").toLowerCase();
+
+        boolean result = checkPalindrome(input, 0, input.length() - 1);
+
+        System.out.println("Is Palindrome?: " + result);
+
+        sc.close();
+    }
+
+    /**
+     * Recursive palindrome checker
+     */
+    private static boolean checkPalindrome(String str, int start, int end) {
+
+        // Base case
+        if (start >= end) {
+            return true;
         }
 
-        // Flag to track palindrome result
-        boolean isPalindrome = true;
-
-        // Continue comparison while more than one element exists
-        while (list.size() > 1) {
-            char first = list.removeFirst();
-            char last = list.removeLast();
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
+        // Compare characters
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
         }
 
-        // Display result
-        if (isPalindrome) {
-            System.out.println(input + " is a palindrome.");
-        } else {
-            System.out.println(input + " is not a palindrome.");
-        }
+        // Recursive call
+        return checkPalindrome(str, start + 1, end - 1);
     }
 }
