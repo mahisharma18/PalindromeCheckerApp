@@ -1,41 +1,30 @@
 import java.util.Scanner;
 
-public class UseCase13PalindromeCheckerApp {
+public class UseCase1HotelBookingApp {
 
-    /**
-     * Application entry point
-     */
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Input: ");
-        String input = sc.nextLine();
+        // Input
+        System.out.print("Enter customer name: ");
+        String name = sc.nextLine();
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        System.out.print("Enter number of nights: ");
+        int nights = sc.nextInt();
 
-        System.out.println("Is Palindrome?: " + result);
+        System.out.print("Enter cost per night: ");
+        double costPerNight = sc.nextDouble();
+
+        // Processing
+        double totalCost = nights * costPerNight;
+
+        // Output
+        System.out.println("Customer Name: " + name);
+        System.out.println("Number of Nights: " + nights);
+        System.out.println("Cost per Night: " + costPerNight);
+        System.out.println("Total Cost: " + totalCost);
 
         sc.close();
-    }
-
-    /**
-     * Recursive palindrome checker
-     */
-    private static boolean isPalindrome(String str, int start, int end) {
-
-        // Base case
-        if (start >= end) {
-            return true;
-        }
-
-        // Case-insensitive comparison
-        if (Character.toLowerCase(str.charAt(start)) !=
-                Character.toLowerCase(str.charAt(end))) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
     }
 }
