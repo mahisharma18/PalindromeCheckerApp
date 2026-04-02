@@ -1,0 +1,2 @@
+public class PalindromeCalculator {
+}
